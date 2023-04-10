@@ -20,7 +20,7 @@ export default function Home() {
   const [loading, setLoading] = useState(null);
   const [loadingSize, setLoadingSize] = useState({actual: 0, max: null});
   const [status, setStatus] = useState({ size: 0, name: "" });
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
 
   const handleUpload = () => {
     inputRef.current.click();
@@ -28,7 +28,7 @@ export default function Home() {
 
   const uploadFile = (file) => {
     if (!file) {
-      setError("No file selected");
+      setError(true);
       setStatus({ size: 0, name: "Nenhum arquivo" });
       return;
     }
