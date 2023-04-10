@@ -18,6 +18,7 @@ const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "700"] });
 export default function Home() {
   const inputRef = useRef();
   const [loading, setLoading] = useState(null);
+  const [loadingSize, setLoadingSize] = useState({actual: 0, max: null});
   const [status, setStatus] = useState({ size: 0, name: "" });
   const [error, setError] = useState("");
 
@@ -35,8 +36,10 @@ export default function Home() {
     //   setError('File size exceeds 1 MB')
     //   return;
     // }
+    const size = parseFloat((file.size / 1000).toFixed(2))
     setError(false);
-    setStatus({ size: (file.size / 1000).toFixed(2), name: file.name });
+    setLoadingSize({actual: 0, max: size })
+    setStatus({ size, name: file.name });
     setLoading(true);
   }
 
@@ -61,6 +64,15 @@ export default function Home() {
     }, 2000);
     return () => clearTimeout(timer);
   }, [loading]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if(loadingSize.actual < loadingSize.max - 1)
+        setLoadingSize(prev => ({...prev, actual: prev.actual + 1}));
+    }, loadingSize);
+
+    return () => clearInterval(intervalId);
+  }, [loadingSize]);
 
   return (
     <main className={styles.main}>
@@ -134,7 +146,7 @@ export default function Home() {
                 <Image className={styles.buttonInteractive} src={stopButton} alt="stop button"/>
               </div>
               <p className={`${inter.className} ${styles.weightArchive}`}>
-                30 MB / 74 MB
+                {loadingSize.actual} KB / {loadingSize.max} KB
               </p>
               <Image src={loadingBar} alt="loading bar"/>
             </div>
