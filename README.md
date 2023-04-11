@@ -43,8 +43,7 @@ O desafio foi a criação de um componente de upload, o layout proposto está di
 
 É possível clicar para selecionar ou arrastar o arquivo. Caso o arquivo tenha sido selecionado corretamente, iniciará o carregamento e ele será concluído. Após a seleção de algum arquivo, ao tentar novamente, e clicar em cancelar cairá no caso de erro.
 
-
-_<h2 align="center" ><a href="https://component-upload-boracodar-project-k6szg8hif-rickazuo.vercel.app/" target="_blank">Visite o projeto online</a></h2>_
+_<h2 align="center" ><a href="https://component-upload-boracodar.vercel.app/" target="_blank">Visite o projeto online</a></h2>_
 
 ## 🔖 Layout
 
